@@ -1,0 +1,3 @@
+[submodule "chemdiff"]
+	path = chemdiff
+	url = https://github.com/ervc/chemdiff.git
