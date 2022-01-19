@@ -15,3 +15,7 @@ Authors
 
   Implemented data structures in the code and their dynamic
   allocation. Also rewrote and optimized some parts of the code.
+
+* Eric Van Clepper:
+
+  Modified select rate equations to more closely match those of DALI
