@@ -43,4 +43,4 @@ The outputs will be placed in a subdirectory `./r00/` from where `run_parallel_g
 	``` python get_all_abundances.py {path to directory}```
 You can also do
 	``` python get_all_abundances.py -h ```
-for more options. Once this has been called the `./r00/` can be removed.
+for more options. Once this has been called the `./r00/` directory can be removed.
