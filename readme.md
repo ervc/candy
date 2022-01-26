@@ -7,6 +7,7 @@ CANDY contains two submodules, a modified astrochem (Maret & Bergin 2015) direct
 The astrochem folder is copied from the (astrochem)[https://github.com/smaret/astrochem] github page, complete with documentation and installation instructions. Changes have been made within the `src` folder, and Astrochem can be installed as usual. If you already have astrochem installed on your machine, you can simply copy the `src` folder from here into your astrochem directory (replacing the default astrochem/src folder), then reinstall as usual.
 
 Chemical network files (`.chm`) should follow the same format as astrochem but with added chemical reactions for:
+
 	|description | reacno|
 	|------------:|:-------|
 	| HD formation on grains | 100 |
