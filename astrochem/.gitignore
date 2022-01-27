@@ -103,4 +103,4 @@ tests/*.log
 tests/*.trs
 
 # Network files created by chmconvert
-networks/*.chm
+# networks/*.chm
