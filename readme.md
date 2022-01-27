@@ -4,6 +4,27 @@ CANDY is a protoplanetary disk model for determining the time-dependent chemistr
 
 CANDY contains two submodules, a modified astrochem (Maret & Bergin 2015) directory and the chemdiff directory, where the python wrapper is contained.
 
+## Installation and Requirements
+
+Astrochem dependencies are given in the astrochem wiki, while chemdiff dependencies include openmpi and mpi4py. Recommended installation is using conda to create a virtual environment with all dependencies. A new environment can be created with all needed dependencies with
+
+	conda create --name candy -c conda-forge sundials python cython numpy matplotlib h5py autoconf automake libtool mpi4py openmpi
+
+Active the enviornment with
+
+	conda activate candy
+
+or
+
+	source activate candy
+
+To compile Astrochem run the following commands *from the Astrochem subdirectory*
+
+	./bootstrap
+	./configure CPPFLAGS="-I$CONDA_PREFIX/include" LDFLAGS="-Wl,-rpath,$CONDA_PREFIX/lib -L/$CONDA_PREFIX/lib"  --prefix=$CONDA_PREFIX
+	make
+	make install
+
 ## Astrochem
 
 The astrochem folder is copied from the (astrochem)[https://github.com/smaret/astrochem] github page, complete with documentation and installation instructions. Changes have been made within the `src` folder, and Astrochem can be installed as usual. If you already have astrochem installed on your machine, you can simply copy the `src` folder from here into your astrochem directory (replacing the default astrochem/src folder), then reinstall as usual.
