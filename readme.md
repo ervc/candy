@@ -53,4 +53,4 @@ You can also do
 
 	python get_all_abundances.py -h
 
-for more options. Once this has been called the `./r00/` directory can be removed.
+to see more options. Once this has been called the `./r00/` directory can safely be removed.
