@@ -25,6 +25,12 @@ To compile Astrochem run the following commands *from the Astrochem subdirectory
 	make
 	make install
 
+Finally, ensure chemdiff is added to your path by typing (for example)
+
+	export PATH=/{path}/{to}/{candy}/candy/
+
+you can use `pwd` to find the path to the correct directory.
+
 ## Astrochem
 
 The astrochem folder is copied from the (astrochem)[https://github.com/smaret/astrochem] github page, complete with documentation and installation instructions. Changes have been made within the `src` folder, and Astrochem can be installed as usual. If you already have astrochem installed on your machine, you can simply copy the `src` folder from here into your astrochem directory (replacing the default astrochem/src folder), then reinstall as usual.
