@@ -8,7 +8,7 @@ CANDY contains two submodules, a modified astrochem (Maret & Bergin 2015) direct
 
 Astrochem dependencies are given in the astrochem wiki, while chemdiff dependencies include openmpi and mpi4py. Recommended installation is using conda to create a virtual environment with all dependencies. A new environment can be created with all needed dependencies with
 
-	conda create --name candy -c conda-forge sundials python cython numpy matplotlib h5py autoconf automake libtool mpi4py openmpi
+	conda create --name candy -c conda-forge sundials=5.7.0 python cython numpy matplotlib h5py autoconf automake libtool mpi4py openmpi
 
 Active the enviornment with
 
@@ -25,9 +25,9 @@ To compile Astrochem run the following commands *from the Astrochem subdirectory
 	make
 	make install
 
-Finally, ensure chemdiff is added to your path by typing (for example)
+Finally, ensure chemdiff is added to your python path by typing (for example)
 
-	export PATH=/{path}/{to}/{candy}/candy/
+	export PYTHONPATH=/{path}/{to}/{candy}/candy/:$PYTHONPATH
 
 you can use `pwd` to find the path to the correct directory.
 
