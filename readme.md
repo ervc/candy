@@ -81,3 +81,5 @@ You can also do
 	python get_all_abundances.py -h
 
 to see more options. Once this has been called the `./r00/` directory can safely be removed.
+
+*Note:* To include self-shielding, the included `data_coselfs_iso.dat` file must be included in the directory from which you are running CANDY.
