@@ -131,6 +131,8 @@ int set_initial_abundances (const char** species, int n_initialized_abundances,
                             const double* initial_abundances, const net_t* network,
 			    double* abundances );
 
+int set_initial_abundance( const char* species, const double initial_abundance, const net_t* network, double* abundances );
+
 int solver_init (const cell_t* cell, const net_t* network, const phys_t* phys,
                  const double* abundances , double density, double abs_err, double rel_err,
                  astrochem_mem_t* astrochem_mem);

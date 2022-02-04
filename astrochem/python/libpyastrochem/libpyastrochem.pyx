@@ -1,5 +1,3 @@
-from libc.stdlib cimport malloc, free
-
 cdef extern from "../../src/astrochem.h":
 
     cdef double CHI_DEFAULT
@@ -35,6 +33,8 @@ cdef extern from "../../src/libastrochem.h":
         double nh
         double tgas
         double tdust
+        double NCO
+        double NH2
 
     ctypedef struct astrochem_mem_t:
         params_t params
@@ -47,6 +47,7 @@ cdef extern from "../../src/libastrochem.h":
     int solver_init( const cell_t* cell, const net_t* network, const phys_t* phys, const double* abundances , double density, double abs_err, double rel_err, astrochem_mem_t* astrochem_mem )
     int solve( const astrochem_mem_t* astrochem_mem, const net_t* network, double* abundances, double time , const cell_t* new_cell, int verbose )
     void solver_close( astrochem_mem_t* astrochem_mem )
+    int set_initial_abundance( const char* species, const double initial_abundance, const net_t* network, double* abundances )
 
 _ABS_ERR_DEFAULT = ABS_ERR_DEFAULT
 _REL_ERR_DEFAULT = REL_ERR_DEFAULT
@@ -134,10 +135,13 @@ cdef class Cell:
     nh    -- nh to use
     tgas  -- tgas to use
     tdust -- tdust to use
+    NCO   -- CO column density
+    NH2   -- H2 column density
+    xray  -- xray ionization to use
     """
     cdef public cell_t thisstruct
 
-    def __cinit__( self, double av, double nh, double tgas, double tdust ):
+    def __cinit__( self, double av, double nh, double tgas, double tdust, double NCO, double NH2, double xray ):
         self.thisstruct.av = av
         self.thisstruct.nh = nh
         self.thisstruct.tdust = tgas
@@ -179,6 +183,33 @@ cdef class Cell:
         def __set__(self, double tdust):
             self.thisstruct.tdust = tdust
 
+    property NCO:
+        """
+        tdust cell property
+        """
+        def __get__(self):
+            return self.thisstruct.NCO
+        def __set__(self, double NCO):
+            self.thisstruct.NCO = NCO
+
+    property NH2:
+        """
+        tdust cell property
+        """
+        def __get__(self):
+            return self.thisstruct.NH2
+        def __set__(self, double NH2):
+            self.thisstruct.NH2 = NH2
+
+    property xray:
+        """
+        tdust cell property
+        """
+        def __get__(self):
+            return self.thisstruct.xray
+        def __set__(self, double xray):
+            self.thisstruct.xray = xray
+
 cdef class Solver:
     """
     Chemical reaction solver
@@ -210,18 +241,9 @@ cdef class Solver:
 
         if alloc_abundances( &c_net , &self.abundances ) != 0 :
             raise MemoryError
-        cdef char **initial_abundances_str = <char **>malloc(len(initial_abundances) * sizeof(char *))
-        cdef double* initial_abundances_val = <double*>malloc(len(initial_abundances) * sizeof(double))
-        cdef int j = 0
-        for i in initial_abundances:
-            initial_abundances_byte = i.encode() # str -> byte
-            initial_abundances_str[j] = initial_abundances_byte
-            initial_abundances_val[j] = initial_abundances[i]
-            j+=1
-        set_initial_abundances( < const char** >initial_abundances_str, len(initial_abundances), initial_abundances_val,  &c_net, self.abundances )
-        free( initial_abundances_str )
-        free( initial_abundances_val )
-
+        for spec in initial_abundances:
+            set_initial_abundance(spec.encode(), initial_abundances[spec], &c_net, self.abundances)
+            
         solver_init( &c_cell, &c_net, &c_phys , self.abundances, density, abs_err, rel_err, &self.astrochemstruct )
 
     def __dealloc__(self):

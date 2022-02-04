@@ -1,6 +1,6 @@
 #  tools.py - Python tools for astrochem
 #
-#  Copyright (c) 2006-2019 Sebastien Maret
+#  Copyright (c) 2006-2021 Sebastien Maret
 #
 #  This file is part of Astrochem.
 #
@@ -254,7 +254,7 @@ class network_reader:
                     rtype = int(rconsts[3])
                     rnumber = int(rconsts[4])
                 except:
-                    raise Exception("incorrect input on line %i,\n%s" % (linenumber,line))                    
+                    raise Exception("incorrect input on line %i" % linenumber)                    
 
                 react = reaction(reactants, products, alpha, beta, gamma,
                                  rtype, rnumber)
