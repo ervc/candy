@@ -254,7 +254,7 @@ class network_reader:
                     rtype = int(rconsts[3])
                     rnumber = int(rconsts[4])
                 except:
-                    raise Exception("incorrect input on line %i" % linenumber)                    
+                    raise Exception("incorrect input on line %i,\n%s" % (linenumber,line))                    
 
                 react = reaction(reactants, products, alpha, beta, gamma,
                                  rtype, rnumber)
