@@ -1,0 +1,23 @@
+! input file for chemdiff
+! section headers start with '#'
+! comment lines begin with '!'
+
+# model
+chmfile = /home/ericvc/candy/astrochem/networks/umist12_x.chm
+diff_dt = 100
+chem_dt = 500
+tf = 1.e4
+
+# phys
+r = 30
+r_units = au
+alpha = 1e-3
+
+# abundances
+H2 = 0.5
+He = 0.16
+CO = 2e-4
+H2O = 2e-4
+grain = 2.2e-12
+H2-18-O = 4e-7
+C-18-O = 4e-7

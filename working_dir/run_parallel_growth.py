@@ -1,6 +1,7 @@
 import numpy as np
 from chemdiff import *
 from chemdiff.parallel import *
+import chemdiff.chemdiff_io as cdio
 import os
 import subprocess
 from mpi4py import MPI
@@ -14,21 +15,27 @@ start = default_timer()
 ################ INITIALIZE MPI ################
 comm,nproc,rank = mpi_initialize()
 
+############### READIN FROM FILE ################
+model_inputs, phys_inputs, input_abundances = cdio.read_infile('cdinput.in')
+
 ############ SETUP AND CHEM PARAMS #############
-f_pebout = 'pebble_composition.out'
+f_pebout = model_inputs['pebfile']
 with open(f_pebout,'w') as f:
 	f.write('time    species    pebble_col_abundance\n')
 
 grow_pebbles = True
 # put your network file here
-chm = '/home/ericvc/astrochem/networks/'
-chm += 'data_chemnet_Deuterium_carbon_oxygen_frac.chm'
+chm = model_inputs['chmfile']
 
 
 ############ INITIALIZE THE COLUMN #############
-r = 30*au
-ti = 0
-tf = 1.e4 # yrs
+r = float(phys_inputs['r'])
+if phys_inputs['r_units'] == 'au':
+	r*=au
+elif phys_inputs['r_units'] != 'cm':
+	raise NameError("r_units must be au or cm, default is au")
+ti = float(model_inputs['ti'])
+tf = float(model_inputs['tf'])
 
 # temp profile from Krijt+2018
 tmid = 130*(r/au)**(-1/2)
@@ -40,15 +47,11 @@ sigc = (2-p)*Mdisk/(2*np.pi*rc*rc)
 sig = sigc*(r/rc)**(-p) * np.exp(-(r/rc)**(2-p))
 
 # model paramters
-alpha = 1e-3
+alpha = float(phys_inputs['alpha'])
 nzs = 50
-dt = 100 # yrs
-chemtime = 500 # yrs
-touts = []
-touts += [(i+1.)*pow(10,3) for i in range(9)]
-touts += [(i+1.)*pow(10,4) for i in range(9)]
-touts += [(i+2)/2*pow(10,5) for i in range(18)]
-touts += [1.e6]
+dt = float(model_inputs['diff_dt'])
+chemtime = float(model_inputs['chem_dt'])
+touts = model_inputs['touts']
 nts = len(touts)
 nchems = int(tf/chemtime)
 ndiffs = int(chemtime/dt)
@@ -62,21 +65,23 @@ h = col.h
 o1618 = 500
 o1617 = 2600
 
+init_abuns = dict(input_abundances)
+
 ### Bosman 2018
-init_abuns = {
-	'H2' : 0.5,
-	'He' : 9.75e-2,
-	'NH3': 1.45e-6,
-	'H2O': 1.18e-4,
-	'CO' : 6.00e-5,
-	'N2' : 2.00e-5,
-	'CH4': 2.00e-6,
-	'CH3OH' : 1.00e-6,
-	'H2S' : 1.91e-8,
-	'CO2' : 5.00e-5,
-	'HCN' : 3.50e-7,
-	'grain' : 2.2e-12
-}
+# init_abuns = {
+# 	'H2' : 0.5,
+# 	'He' : 9.75e-2,
+# 	'NH3': 1.45e-6,
+# 	'H2O': 1.18e-4,
+# 	'CO' : 6.00e-5,
+# 	'N2' : 2.00e-5,
+# 	'CH4': 2.00e-6,
+# 	'CH3OH' : 1.00e-6,
+# 	'H2S' : 1.91e-8,
+# 	'CO2' : 5.00e-5,
+# 	'HCN' : 3.50e-7,
+# 	'grain' : 2.2e-12
+# }
 ### Lyons and Young 2005
 # init_abuns = {
 # 	'H2' : 0.5,
@@ -92,11 +97,11 @@ init_abuns = {
 # init_abuns['C-17-O'] = init_abuns['CO']/o1617
 
 # Physical params
-chi = 50
-cosmic = 1.3e-17 # s^-1
-grain_size = 0.1 # micron
-dg0 = 0.01
-opacity = 1000 # cm2 g-1 total opacity dust+gas
+chi = float(phys_inputs['chi'])
+cosmic = float(phys_inputs['cosmic'])
+grain_size = float(phys_inputs['grain_size'])
+dg0 = float(phys_inputs['dg0'])
+opacity = float(phys_inputs['opacity'])
 rho0 = sig/np.sqrt(2.*np.pi)/h
 xray = 0
 zq = 3
@@ -134,7 +139,7 @@ for j in reversed(range(nzs)):
 	NH2 += nh2*col.dz
 	NH += nh*col.dz
 	# optical depth
-	tau += rho*100*opacity*col.dz*dg0
+	tau += rho*opacity*col.dz*dg0
 
 	### CREATE THE CELL
 	col.cells[j] = Cell(r,z,chi=chi,cosmic=cosmic,grain_size=grain_size,dust_gas_ratio=dg0,
@@ -156,7 +161,9 @@ for t in range(nchems):
 	if rank == 0:
 		for diff_loop in range(ndiffs):
 			# change grain abundances
-			peb_comp = grow_grains(col,peb_comp,time,grow_pebbles)
+			peb_comp = grow_grains(col,peb_comp,time,grow_pebbles,
+									timescale_factor = phys_inputs['growth_timescale_factor'],
+									grow_height = phys_inputs['growth_height'])
 			do_diffusion(col)
 		update_cells(col,opacity)
 
