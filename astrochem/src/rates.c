@@ -40,7 +40,9 @@ getcoss (double NCO, double NH2, int isotope)
     fprintf (stderr, "Unknown isotope of Carbon %i, known isotopes of carbon are 16, 17, and 18",isotope);
     exit(1);
   }
-  fp=fopen("data_coselfs_iso.dat","r");
+  // data_coselfs_ios.data should be in project directory, but
+  // astrochem is run from project/r00/zXX, so look up two directories!
+  fp=fopen("../../data_coselfs_iso.dat","r");
   if(fp==NULL){ printf("STOP: Cannot read data_coselfs_iso.dat\n"); exit(1); } 
 
   // fprintf(stdout, "Height is %f AU\n= %f cm\n", zau,zcm); 
