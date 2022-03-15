@@ -40,10 +40,10 @@ main (void)
 
   f = fopen ("source.mdl", "w");
   fprintf (f, "# This source model file was created by source_test\n");
-  fprintf (f, "# cell number, Av [mag], n(H) [cm^-3], Tgas [K], Tdust [K]\n");
-  fprintf (f, "0	 0.1	1e+02	15.0	12.0\n");
-  fprintf (f, "1	 1.0	1e+03	11.0	10.0\n");
-  fprintf (f, "2	10.0	1e+04	 8.0	 7.0\n");
+  fprintf (f, "# cell number, Av [mag], n(H) [cm^-3], Tgas [K], Tdust [K], NCO [cm^-2], NH2 [cm^-2], xray [s^-1], R [au], Z [au]\n");
+  fprintf (f, "0	 0.1	1e+02	15.0	12.0   1   1   0   30   3\n");
+  fprintf (f, "1	 1.0	1e+03	11.0	10.0   1   1   0   20   2\n");
+  fprintf (f, "2	10.0	1e+04	 8.0	 7.0   1   1   0   25   2.5\n");
   fclose (f);
 
   /* Read it */

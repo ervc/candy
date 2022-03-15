@@ -64,9 +64,9 @@ trace_routes = 1
 """
 
 source_mdl = """# Source model file example
-# shell number, Av [mag], n(H) [cm^-3], Tgas [K], Tdust [K]
+# shell number, Av [mag], n(H) [cm^-3], Tgas [K], Tdust [K], NCO, NH2, xray, R, Z
 #
-0	20.0	1e+04	10.0	10.0
+0	20.0	1e+04	10.0	10.0    1    1    0   30   3
 """
 
 class TestSequenceFunctions(unittest.TestCase):
