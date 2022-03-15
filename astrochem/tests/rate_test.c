@@ -61,6 +61,11 @@ main (void)
   double k;
   double NCO = 1;
   double NH2 = 1;
+<<<<<<< HEAD
+=======
+  double n_hydro = 0;
+  double n_ice = 0;
+>>>>>>> run_python
   double xray = 0;
 
   /* e(-) attachment on grains:
@@ -72,7 +77,11 @@ main (void)
   gamm = 0;
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
 	    av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
 	    ice_abundance,0,0,xray);
+=======
+	    ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (9.536397e-4, k, 1e-6) == 1)
     return EXIT_FAILURE;
 
@@ -85,7 +94,11 @@ main (void)
   gamm = 0;
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
       av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
       ice_abundance,0,0,xray);
+=======
+      ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (9.037422e-14, k, 1e-6) == 1)
     return EXIT_FAILURE;
 
@@ -97,7 +110,11 @@ main (void)
 
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
       av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
       ice_abundance,0,0,xray);
+=======
+      ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (1.209000e-17, k, 1e-6) == 1)
     return EXIT_FAILURE;
 
@@ -111,7 +128,11 @@ main (void)
 
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
       av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
       ice_abundance,0,0,xray);
+=======
+      ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (2.464752e-8, k, 1e-6) == 1)
     return EXIT_FAILURE;
 
@@ -125,7 +146,11 @@ main (void)
 
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
       av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
       ice_abundance,0,0,xray);
+=======
+      ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (5.723387e-58, k, 1e-6) == 1)
     return EXIT_FAILURE;
 
@@ -139,7 +164,11 @@ main (void)
 
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
       av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
       ice_abundance,0,0,xray);
+=======
+      ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (4.305263e-22, k, 1e-6) == 1)
     return EXIT_FAILURE;
 
@@ -153,7 +182,11 @@ main (void)
 
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
       av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
       ice_abundance,0,0,xray);
+=======
+      ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (3.593005e-14, k, 1e-6) == 1)
     return EXIT_FAILURE;
 
@@ -167,7 +200,11 @@ main (void)
 
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
       av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
       ice_abundance,0,0,xray);
+=======
+      ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (8.239140e-40, k, 1e-2) == 1)
     return EXIT_FAILURE;
 
@@ -181,7 +218,11 @@ main (void)
 
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
       av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
       ice_abundance,0,0,xray);
+=======
+      ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (2.194592e-14, k, 1e-6) == 1)
     return EXIT_FAILURE;
 
@@ -195,7 +236,11 @@ main (void)
 
   k = rate (alpha, beta, gamm, reaction_type, reaction_no, nh, NCO, NH2,
       av, tgas, tdust, chi, cosmic, grain_size, grain_abundance,
+<<<<<<< HEAD
       ice_abundance,0,0,xray);
+=======
+      ice_abundance, n_hydro, n_ice, xray);
+>>>>>>> run_python
   if (equaltol (4.3e-16, k, 1e-6) == 1)
     return EXIT_FAILURE;
 
