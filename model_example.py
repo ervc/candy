@@ -8,7 +8,7 @@ import astrochem.wrapper as ac
 import numpy as np
 
 # Set the physical parameters
-p = ac.phys()
+p = ac.Phys()
 p.cosmic = 1.3e-17
 p.chi = 1.0
 

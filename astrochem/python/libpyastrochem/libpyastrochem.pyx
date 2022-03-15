@@ -33,8 +33,6 @@ cdef extern from "../../src/libastrochem.h":
         double nh
         double tgas
         double tdust
-        double NCO
-        double NH2
 
     ctypedef struct astrochem_mem_t:
         params_t params
@@ -135,13 +133,10 @@ cdef class Cell:
     nh    -- nh to use
     tgas  -- tgas to use
     tdust -- tdust to use
-    NCO   -- CO column density
-    NH2   -- H2 column density
-    xray  -- xray ionization to use
     """
     cdef public cell_t thisstruct
 
-    def __cinit__( self, double av, double nh, double tgas, double tdust, double NCO, double NH2, double xray ):
+    def __cinit__( self, double av, double nh, double tgas, double tdust ):
         self.thisstruct.av = av
         self.thisstruct.nh = nh
         self.thisstruct.tdust = tgas
@@ -182,33 +177,6 @@ cdef class Cell:
             return self.thisstruct.tdust
         def __set__(self, double tdust):
             self.thisstruct.tdust = tdust
-
-    property NCO:
-        """
-        tdust cell property
-        """
-        def __get__(self):
-            return self.thisstruct.NCO
-        def __set__(self, double NCO):
-            self.thisstruct.NCO = NCO
-
-    property NH2:
-        """
-        tdust cell property
-        """
-        def __get__(self):
-            return self.thisstruct.NH2
-        def __set__(self, double NH2):
-            self.thisstruct.NH2 = NH2
-
-    property xray:
-        """
-        tdust cell property
-        """
-        def __get__(self):
-            return self.thisstruct.xray
-        def __set__(self, double xray):
-            self.thisstruct.xray = xray
 
 cdef class Solver:
     """
