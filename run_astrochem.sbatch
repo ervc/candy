@@ -16,5 +16,5 @@
 module load python
 
 # Run code here
-source activate astrochem
+source activate candy
 mpiexec python run_growth_parallel.py
