@@ -147,8 +147,7 @@ f (realtype t __attribute__ ((unused)), N_Vector y, N_Vector ydot,
           if (ih >= 0) n_H = NV_Ith_S(y,ih);
           if (id >= 0) n_D = NV_Ith_S(y,id);
 
-          reac_rates[i] = reac_rates[i]/(1.e3 + fmax(n_H,n_D));
-          y_product *= reac_rates[i];
+          y_product *= reac_rates[i]/(1.e3 + fmax(n_H,n_D));
           y_product *= NV_Ith_S(y,reactions[i].reactants[0])*NV_Ith_S(y,reactions[i].reactants[1]);
         }
       else if (reactions[i].reaction_type == 21 || reactions[i].reaction_type == 23)

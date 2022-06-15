@@ -275,6 +275,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
     case 100:
       {
         /* HD formation on grains */
+        // same as H2 formation, but using H and D abundances in solve.c
         double sqterm, beta_H2, beta_alpha, xi, f_mlps, eta, stick, s_eta;   
         f_mlps=1e-10; // monolayers per second                  
         sqterm=pow(1.0+sqrt((10000.0-200.0)/(600.0-200.0)),2.0); // square root term in Eq. 16 & 17
@@ -331,7 +332,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
     }
 
     case 14:
-      /* photo-dissociation of H2 with shielding */
+      /* photo-dissociation of H2 with shielding (Draine & Bertoldi eq. 37)*/
       {
         double NH2_5e14, delta_v;
         NH2_5e14 = NH2 / 5.e14;
@@ -342,7 +343,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
         break;
       }
     case 114:
-      /* photo-dissociation of HD with shielding */
+      /* photo-dissociation of HD with shielding (Same as H2 shielding)*/
       {
         double NHD, NHD_5e14, delta_v;
         NHD = 1.e15; // worry about this later :(
