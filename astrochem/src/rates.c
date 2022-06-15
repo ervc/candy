@@ -224,7 +224,7 @@ getcoss (double NCO, double NH2, int isotope)
 
 double
 rate (double alpha, double beta, double gamm, int reaction_type,
-      int reaction_no __attribute__ ((unused)), double nh, double NCO, double NH2, 
+      int reaction_no __attribute__ ((unused)), double nh, double NCO, double NH2, double NHD,
       double av, double tgas, double tdust, double chi, double cosmic,
       double grain_size, double grain_abundance, double ice_abundance, double n_hydro, double n_ice, double xray)
 {
@@ -346,7 +346,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
       /* photo-dissociation of HD with shielding (Same as H2 shielding)*/
       {
         double NHD, NHD_5e14, delta_v;
-        NHD = 1.e15; // worry about this later :(
+        // NHD = 1.e15; // should update from func call!
         NHD_5e14 = NHD/5e14;
         delta_v = 2.e4; //thermal dispersion in cm/s
         theta=0.965/pow(1.0+(NHD_5e14/delta_v),2.0)+

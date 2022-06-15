@@ -30,7 +30,7 @@ getcoss (double coabun, double h2abun, int isotope);
 
 double
 rate (double alpha, double beta, double gamm, int reaction_type,
-      int reaction_no __attribute__ ((unused)), double nh, double NCO, double NH2, 
+      int reaction_no __attribute__ ((unused)), double nh, double NCO, double NH2, double NHD,
       double av, double tgas, double tdust, double chi, double cosmic,
       double grain_size, double grain_abundance, double ice_abundance, double n_hydro, double n_ice, double xray);
 

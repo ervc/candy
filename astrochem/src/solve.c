@@ -77,6 +77,7 @@ f (realtype t __attribute__ ((unused)), N_Vector y, N_Vector ydot,
   double grain_abundance = ((params_t *) params)->grain_abundance;
   double NCO = ((params_t *) params)->NCO;
   double NH2 = ((params_t *) params)->NH2;
+  double NHD = ((params_t *) params)->NHD;
   double xray = ((params_t *) params)->xray;
 
   /* Loop over the reactions and build the right hand ODE system
@@ -159,7 +160,7 @@ f (realtype t __attribute__ ((unused)), N_Vector y, N_Vector ydot,
                                 reactions[i].gamma,
                                 reactions[i].reaction_type,
                                 reactions[i].reaction_no,
-                                nh, NCO, NH2, av, tgas, tdust, //NCO and NH2 are passed as 1.0 because they don't matter for this reaction
+                                nh, NCO, NH2, NHD, av, tgas, tdust,
                                 chi, cosmic,
                                 grain_size,
                                 grain_abundance,
@@ -177,7 +178,7 @@ f (realtype t __attribute__ ((unused)), N_Vector y, N_Vector ydot,
                                 reactions[i].gamma,
                                 reactions[i].reaction_type,
                                 reactions[i].reaction_no,
-                                nh, NCO, NH2, av, tgas, tdust, //NCO and NH2 are passed as 1.0 because they don't matter for this reaction
+                                nh, NCO, NH2, NHD, av, tgas, tdust,
                                 chi, cosmic,
                                 grain_size,
                                 grain_abundance,
@@ -634,7 +635,7 @@ int solver_init( const cell_t* cell, const net_t* network, const phys_t* phys,
                                 3.02e+00,
                                 network->reactions[i].reaction_type,
                                 network->reactions[i].reaction_no,
-                                cell->nh, cell->NCO, cell->NH2,
+                                cell->nh, cell->NCO, cell->NH2, cell->NHD,
                                 cell->av, cell->tgas, cell->tdust, 
                                 phys->chi, phys->cosmic,
                                 phys->grain_size,
@@ -671,7 +672,7 @@ int solver_init( const cell_t* cell, const net_t* network, const phys_t* phys,
                                 3.02e+00,
                                 network->reactions[i].reaction_type,
                                 network->reactions[i].reaction_no,
-                                cell->nh, cell->NCO, cell->NH2,
+                                cell->nh, cell->NCO, cell->NH2, cell->NHD,
                                 cell->av, cell->tgas, cell->tdust, 
                                 phys->chi, phys->cosmic,
                                 phys->grain_size,
@@ -706,6 +707,7 @@ int solver_init( const cell_t* cell, const net_t* network, const phys_t* phys,
                                                   cell->nh, 
                                                   cell->NCO,
                                                   cell->NH2,
+                                                  cell->NHD,
                                                   cell->av, 
                                                   cell->tgas,
                                                   cell->tdust, 
@@ -729,6 +731,7 @@ int solver_init( const cell_t* cell, const net_t* network, const phys_t* phys,
   astrochem_mem->params.tdust = cell->tdust;
   astrochem_mem->params.NCO = cell->NCO;
   astrochem_mem->params.NH2 = cell->NH2;
+  astrochem_mem->params.NHD = cell->NHD;
   astrochem_mem->params.chi = phys->chi;
   astrochem_mem->params.cosmic = phys->cosmic;
   astrochem_mem->params.grain_size = phys->grain_size;
@@ -794,7 +797,7 @@ int solve( astrochem_mem_t* astrochem_mem, const net_t* network, double* abundan
                                                       network->reactions[i].gamma,
                                                       network->reactions[i].reaction_type,
                                                       network->reactions[i].reaction_no,
-                                                      new_cell->nh, new_cell->NCO, new_cell->NH2,
+                                                      new_cell->nh, new_cell->NCO, new_cell->NH2, new_cell->NHD,
                                                       new_cell->av, new_cell->tgas,
                                                       new_cell->tdust, astrochem_mem->params.chi,
                                                       astrochem_mem->params.cosmic,
@@ -811,6 +814,7 @@ int solve( astrochem_mem_t* astrochem_mem, const net_t* network, double* abundan
       astrochem_mem->params.tdust = new_cell->tdust;
       astrochem_mem->params.NCO = new_cell->NCO;
       astrochem_mem->params.NH2 = new_cell->NH2;
+      astrochem_mem->params.NHD = new_cell->NHD;
       astrochem_mem->params.xray = new_cell->xray;
 
       /* Re-initialize the solver */
