@@ -60,6 +60,7 @@ typedef struct
   double tdust;
   double NCO;
   double NH2;
+  double NHD;
   double xray;
 } cell_t;
 
