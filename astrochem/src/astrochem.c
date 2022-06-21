@@ -457,6 +457,7 @@ full_solve (hid_t fid, hid_t dataset, hid_t* routeDatasets, hid_t dataspace, hid
   cell_unik.tdust = cell->tdust[0];
   cell_unik.NCO = cell->NCO[0];
   cell_unik.NH2 = cell->NH2[0];
+  cell_unik.NHD = cell->NHD[0];
   cell_unik.xray = cell->xray[0];
   // solver_init gets the ODE solver ready
   // this is also where rate is called for steady state!
@@ -481,6 +482,7 @@ full_solve (hid_t fid, hid_t dataset, hid_t* routeDatasets, hid_t dataspace, hid
               cell_unik.tdust = cell->tdust[i];
               cell_unik.NCO = cell->NCO[i];
               cell_unik.NH2 = cell->NH2[i];
+              cell_unik.NHD = cell->NHD[i];
               cell_unik.xray = cell->xray[i];
 
               if( solve( &astrochem_mem, network, abundances,  ts->time_steps[i], &cell_unik, verbose ) != EXIT_SUCCESS )

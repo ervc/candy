@@ -479,7 +479,7 @@ read_source (const char *source_file, mdl_t * source_mdl,
   int n_cell = 0;
   int allocated = 0;
   SOURCE_READ_MODE mode = R_STATIC;     //0 static, 1 dynamic, 2 time_step reading
-  double av, nh, tgas, tdust, NCO, NH2, xray;
+  double av, nh, tgas, tdust, NCO, NH2, NHD, xray;
 
 
 
@@ -601,7 +601,7 @@ read_source (const char *source_file, mdl_t * source_mdl,
           int tmp_cell, tmp_ts;
           //Format and value not checked
           sscanf (line, "%d %d %lf %lf %lf %lf %lf %lf %lf", &tmp_cell, &tmp_ts, &av, &nh,
-                  &tgas, &tdust, &NCO, &NH2, &xray);
+                  &tgas, &tdust, &NCO, &NH2, &NHD, &xray);
           // fprintf(stdout, "read in NCO, NH2 are %e %e\n", NCO,NH2);
           if (tmp_ts < source_mdl->ts.n_time_steps
               || tmp_cell < source_mdl->n_cells)
@@ -612,6 +612,7 @@ read_source (const char *source_file, mdl_t * source_mdl,
               source_mdl->cell[tmp_cell].tdust[tmp_ts] = tdust;
               source_mdl->cell[tmp_cell].NCO[tmp_ts] = NCO;
               source_mdl->cell[tmp_cell].NH2[tmp_ts] = NH2;
+              source_mdl->cell[tmp_cell].NHD[tmp_ts] = NHD;
               source_mdl->cell[tmp_cell].xray[tmp_ts] = xray;
             }
           else
@@ -630,7 +631,7 @@ read_source (const char *source_file, mdl_t * source_mdl,
             {
               int tmp;
               if (sscanf (line, "%d %lf %lf %lf %lf %lf %lf %lf",
-                          &tmp, &av, &nh, &tgas, &tdust, &NCO, &NH2, &xray) < 7)
+                          &tmp, &av, &nh, &tgas, &tdust, &NCO, &NH2, &NHD, &xray) < 8)
                 {
                   fprintf (stderr,
                            "astrochem: %s: %d: error: incorrect format in source file %s .\n",
@@ -644,6 +645,7 @@ read_source (const char *source_file, mdl_t * source_mdl,
               source_mdl->cell[n_cell].tdust[0] = tdust;
               source_mdl->cell[n_cell].NCO[0] = NCO;
               source_mdl->cell[n_cell].NH2[0] = NH2;
+              source_mdl->cell[n_cell].NHD[0] = NHD;
               source_mdl->cell[n_cell].xray[0] = xray;
               n_cell++;
             }
@@ -727,7 +729,7 @@ alloc_mdl (mdl_t * source_mdl, int n_cells, int n_time_steps)
      Finally point each pointer to the right block of data.
    */
   double *data;
-  if ((data = malloc (6 * n_cells * n_time_steps * sizeof (double))) == NULL) // allocate /6/ * double for each cell/timestep
+  if ((data = malloc (8 * n_cells * n_time_steps * sizeof (double))) == NULL) // allocate /8/ * double for each cell/timestep
     {
       fprintf (stderr, "astrochem: %s:%d: array allocation failed.\n",
                __FILE__, __LINE__);
@@ -742,13 +744,14 @@ alloc_mdl (mdl_t * source_mdl, int n_cells, int n_time_steps)
   int i;
   for (i = 0; i < n_cells; i++)
     {
-      source_mdl->cell[i].nh = &(data[7 * i * n_time_steps]);
-      source_mdl->cell[i].av = &(data[(7 * i + 1) * n_time_steps]);
-      source_mdl->cell[i].tgas = &(data[(7 * i + 2) * n_time_steps]);
-      source_mdl->cell[i].tdust = &(data[(7 * i + 3) * n_time_steps]);
-      source_mdl->cell[i].NCO = &(data[(7 * i + 4) * n_time_steps]); // add NCO and NH2 to alloc
-      source_mdl->cell[i].NH2 = &(data[(7 * i + 5) * n_time_steps]);
-      source_mdl->cell[i].xray = &(data[(7 * i + 6) * n_time_steps]); // add xray ion rate
+      source_mdl->cell[i].nh = &(data[8 * i * n_time_steps]);
+      source_mdl->cell[i].av = &(data[(8 * i + 1) * n_time_steps]);
+      source_mdl->cell[i].tgas = &(data[(8 * i + 2) * n_time_steps]);
+      source_mdl->cell[i].tdust = &(data[(8 * i + 3) * n_time_steps]);
+      source_mdl->cell[i].NCO = &(data[(8 * i + 4) * n_time_steps]); // add NCO, NH2, and NHD to alloc
+      source_mdl->cell[i].NH2 = &(data[(8 * i + 5) * n_time_steps]);
+      source_mdl->cell[i].NHD = &(data[(8 * i + 6) * n_time_steps]);
+      source_mdl->cell[i].xray = &(data[(8 * i + 7) * n_time_steps]); // add xray ion rate
 
     }
   return EXIT_SUCCESS;
