@@ -600,7 +600,7 @@ read_source (const char *source_file, mdl_t * source_mdl,
         {
           int tmp_cell, tmp_ts;
           //Format and value not checked
-          sscanf (line, "%d %d %lf %lf %lf %lf %lf %lf %lf", &tmp_cell, &tmp_ts, &av, &nh,
+          sscanf (line, "%d %d %lf %lf %lf %lf %lf %lf %lf %lf", &tmp_cell, &tmp_ts, &av, &nh,
                   &tgas, &tdust, &NCO, &NH2, &NHD, &xray);
           // fprintf(stdout, "read in NCO, NH2, NHD are %e %e %e\n", NCO,NH2,NHD);
           if (tmp_ts < source_mdl->ts.n_time_steps
@@ -630,7 +630,7 @@ read_source (const char *source_file, mdl_t * source_mdl,
           if (n_cell < source_mdl->n_cells)
             {
               int tmp;
-              if (sscanf (line, "%d %lf %lf %lf %lf %lf %lf %lf",
+              if (sscanf (line, "%d %lf %lf %lf %lf %lf %lf %lf %lf",
                           &tmp, &av, &nh, &tgas, &tdust, &NCO, &NH2, &NHD, &xray) < 8)
                 {
                   fprintf (stderr,
