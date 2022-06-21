@@ -267,7 +267,6 @@ rate (double alpha, double beta, double gamm, int reaction_type,
         stick=1.0/(1.0+0.04*pow(tgas+tdust,0.5)+2e-3*tgas+8e-6*pow(tgas,2.0));
         s_eta = stick*eta;
 
-        // for now assume gas/dust=100
         k = s_eta*alpha*pow(tgas,beta)*nh*dg100;
         break;
       }
@@ -345,7 +344,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
     case 114:
       /* photo-dissociation of HD with shielding (Same as H2 shielding)*/
       {
-        double NHD, NHD_5e14, delta_v;
+        double NHD_5e14, delta_v;
         // NHD = 1.e15; // should update from func call!
         NHD_5e14 = NHD/5e14;
         delta_v = 2.e4; //thermal dispersion in cm/s

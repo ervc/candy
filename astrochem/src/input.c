@@ -602,7 +602,7 @@ read_source (const char *source_file, mdl_t * source_mdl,
           //Format and value not checked
           sscanf (line, "%d %d %lf %lf %lf %lf %lf %lf %lf", &tmp_cell, &tmp_ts, &av, &nh,
                   &tgas, &tdust, &NCO, &NH2, &NHD, &xray);
-          // fprintf(stdout, "read in NCO, NH2 are %e %e\n", NCO,NH2);
+          // fprintf(stdout, "read in NCO, NH2, NHD are %e %e %e\n", NCO,NH2,NHD);
           if (tmp_ts < source_mdl->ts.n_time_steps
               || tmp_cell < source_mdl->n_cells)
             {
@@ -638,7 +638,7 @@ read_source (const char *source_file, mdl_t * source_mdl,
                            __FILE__, __LINE__, source_file);
                   return EXIT_FAILURE;
                 }
-              // fprintf(stdout, " read in NCO, NH2 %10.3e %10.3e\n", NCO,NH2);
+              fprintf(stdout, "read in NCO, NH2, NHD are %e %e %e\n", NCO,NH2,NHD);
               source_mdl->cell[n_cell].av[0] = av;
               source_mdl->cell[n_cell].nh[0] = nh;
               source_mdl->cell[n_cell].tgas[0] = tgas;
