@@ -1,0 +1,28 @@
+H    + H   ->   H2      3.000e-18   5.000e-01   0.000e+00   0   1
+H    + D   ->   HD      3.000e-18   5.000e-01   0.000e+00   100   2
+
+H2    + uv-photon   ->   H    + H      5.180e-11   1.000e+00   3.020e+00   14   5
+HD    + uv-photon   ->   H    + D      1.500e-09   1.000e+00   0.000e+00   114   9229
+HD    + uv-photon   ->   H    + D      1.036e-10   1.000e+00   3.020e+00   13   14893
+
+! REACTION 3X: Photodissociation
+!
+! - type 30 : Standard Photodissociation (Doty 13)
+!
+! - type 31 : H2 dissociation including self-shielding (Doty/S 84, Doty/V 11)
+!
+! - type 32 : CO dissociation including self-shielding (Doty/S 85, Doty/V 12)
+!
+! - type 33 : C ionization including self-shielding (not implemented in Doty)
+!
+! - type 34 : 13CO dissociation including self-shielding (Doty/S 85, Doty/V 12)
+!
+! - type 35 : C18O/13C18O dissociation including self-shielding (Doty/S 85, Doty/V 12)
+!
+! - type 36 : C17O/13C17O dissociation including self-shielding (Doty/S 85, Doty/V 12)
+!
+! - type 37 : H2 dissociation including self-shielding (Doty/S 84, Doty/V 11)
+
+H2 + PHOTON -> H + H       8915  31   5.180e-11    1.000e+00    3.020e+00    0.000e+00    4.100e+04  H2.PD
+HD + PHOTON -> H + D       9762  37   1.500e-09    1.000e+00    0.000e+00    0.000e+00    4.100e+04  H2.PD
+HD + PHOTON -> H + D      15605  31   1.036e-10    1.000e+00    3.020e+00    0.000e+00    4.100e+04  H2.PD

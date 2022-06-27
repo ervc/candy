@@ -268,6 +268,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
         s_eta = stick*eta;
 
         k = s_eta*alpha*pow(tgas,beta)*nh*dg100;
+        fprintf(stdout, "k H2 formation %e\n", k);
         break;
       }
 
@@ -289,6 +290,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
         s_eta = stick*eta;
 
         k = s_eta*alpha*pow(tgas,beta)*nh*dg100;
+        fprintf(stdout, "k HD formation %e\n", k);
         break;
       }
 
@@ -350,8 +352,11 @@ rate (double alpha, double beta, double gamm, int reaction_type,
         delta_v = 2.e4; //thermal dispersion in cm/s
         theta=0.965/pow(1.0+(NHD_5e14/delta_v),2.0)+
                 0.035/sqrt(1.0+NHD_5e14)*exp(-8.5e-4*sqrt(1.0+NHD_5e14)); 
+        theta = 1.;
 
         k = alpha * chi * exp(-gamm * av) * theta;
+        fprintf(stdout, "NHD is %e\n", NHD);
+        fprintf(stdout, "k HD -> H+D = %e\n", k);
         break;
       }
 
