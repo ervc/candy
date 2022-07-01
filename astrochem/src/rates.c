@@ -337,7 +337,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
       {
         double NH2_5e14, delta_v;
         NH2_5e14 = NH2 / 5.e14;
-        delta_v = 2.e4; //thermal dispersion in cm/s
+        delta_v = 0.2; //thermal dispersion in km/s
         theta = 0.965/pow(1.0 + (NH2_5e14/delta_v), 2.0) +
                   0.035/sqrt(1.0 + NH2_5e14) * exp(-8.5e-4*sqrt(1.0 + NH2_5e14));
         k = alpha * chi * exp (-gamm * av) * theta;
@@ -349,7 +349,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
         double NHD_5e14, delta_v;
         // NHD = 1.e15; // should update from func call!
         NHD_5e14 = NHD/5e14;
-        delta_v = 2.e4; //thermal dispersion in cm/s
+        delta_v = 0.2; //thermal dispersion in km/s
         theta=0.965/pow(1.0+(NHD_5e14/delta_v),2.0)+
                 0.035/sqrt(1.0+NHD_5e14)*exp(-8.5e-4*sqrt(1.0+NHD_5e14)); 
         theta = 1.;
