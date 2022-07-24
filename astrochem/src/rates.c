@@ -252,6 +252,7 @@ rate (double alpha, double beta, double gamm, int reaction_type,
     case 0:
       {
         /* H2 formation on grains */
+        // Cazaux & Tielens 2002
         // k = alpha * pow (tgas / 300, beta) * nh;
 
         double sqterm, beta_H2, beta_alpha, xi, f_mlps, eta, stick, s_eta;   
