@@ -1,7 +1,7 @@
 # CANDY (Chemistry ANd DYnamics)
 
 ## DEPRECATED - PLEASE USE NEWCANDY REPO
-NOTE: This version of CANDY is no longer recommended, and likely no longer works. Please see (NewCANDY)[https://github.com/ervc/newcandy] repo for the most up to date version!
+NOTE: This version of CANDY is no longer recommended, and likely no longer works. Please see [NewCANDY](https://github.com/ervc/newcandy) repo for the most up to date version!
 
 ## OLD CANDY README
 
