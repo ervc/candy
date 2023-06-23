@@ -1,5 +1,10 @@
 # CANDY (Chemistry ANd DYnamics)
 
+## DEPRECATED - PLEASE USE NEWCANDY REPO
+NOTE: This version of CANDY is no longer recommended, and likely no longer works. Please see (NewCANDY)[https://github.com/ervc/newcandy] repo for the most up to date version!
+
+## OLD CANDY README
+
 CANDY is a protoplanetary disk model for determining the time-dependent chemistry and a 1D vertical slice of a dynamic disk. CANDY includes chemistry, vertical diffusion, pebble growth, and ice sequestration. Details of the model are given in Van Clepper et al. 2022.
 
 CANDY contains two submodules, a modified astrochem (Maret & Bergin 2015) directory and the chemdiff directory, where the python wrapper is contained.
